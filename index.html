@@ -3,207 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nikke Red Hood Background</title>
+    <title>Nikke Minimalist Background</title>
     <style>
-        /* 기본 스타일 초기화 및 전체 화면 채우기 */
+        /* 기본 스타일 초기화 및 화면 꽉 채우기 */
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
         body, html {
+            margin: 0;
+            padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #121212; /* 기본 어두운 배경 */
-            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background-color: #ffffff; /* 기본 하얀색 배경 */
             overflow: hidden;
-            color: #ffffff;
         }
 
-        /* 전체 배경 컨테이너 */
+        /* 전체 컨테이너 고정 크기 (Lively Wallpaper용 비례 설정) */
         #wallpaper-container {
             position: relative;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, #1f1f1f 0%, #0d0d0d 100%);
         }
 
-        /* 1. 배경 뒤의 그리드(모눈종이) 패턴 */
-        #wallpaper-container::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 24px 24px;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* 2. 원작 스타일의 비대칭 빨간색 배경 도형 */
+        /* ------------------------------------
+           배경 도형 레이어 (핵심 수정 부분)
+        ------------------------------------ */
         .bg-shape {
             position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 60%;
-            height: 120%;
-            background: linear-gradient(145deg, #d61c1c 0%, #800000 100%);
-            transform: skewX(-16deg); /* 기울임 처리 */
-            box-shadow: 10px 0 40px rgba(0, 0, 0, 0.6);
-            z-index: 2;
+            background: #cc1111; /* 빨간색 */
+            transform: skewX(-15deg);
             transition: transform 0.1s ease-out;
         }
 
-        /* 3. 오른쪽 위의 NIKKE 메인 로고 */
-        .logo-main {
-            position: absolute;
-            top: 50px;
-            right: 5%;
-            font-size: 46px;
-            font-weight: 900;
-            letter-spacing: 3px;
-            text-align: right;
-            line-height: 0.85;
-            font-family: 'Arial Black', Impact, sans-serif;
-            z-index: 3;
-            color: #ffffff;
-        }
-        .logo-sub {
-            font-size: 11px;
-            font-weight: normal;
-            letter-spacing: 6px;
-            color: #b0b0b0;
-            margin-top: 8px;
+        /* 왼쪽 큰 빨간색 절단면 배경 */
+        .bg-left {
+            left: -5%;
+            top: -10%;
+            width: 55%;
+            height: 120%;
         }
 
-        /* 4. 캐릭터 정보 UI 박스 (왼쪽 아래) */
-        .ui-box {
-            position: absolute;
-            bottom: 12%;
-            left: 5%;
-            z-index: 10;
-        }
-        .elysion {
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: 5px;
-            margin-bottom: 8px;
-            font-family: Arial, sans-serif;
-        }
-        .counters {
-            background-color: #e60000;
-            color: white;
-            display: inline-block;
-            padding: 4px 18px;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            transform: skewX(-10deg);
-            box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
-        }
-        .char-name {
-            background-color: #1e1e1e;
-            color: white;
-            font-size: 34px;
-            font-weight: bold;
-            padding: 12px 35px;
-            border-left: 6px solid #e60000;
-            box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-        }
-        /* 화살표 아이콘 모양 흉내 */
-        .char-name::after {
-            content: " ↖";
-            font-size: 18px;
-            color: #e60000;
-            margin-left: 15px;
+        /* 오른쪽 위 작은 빨간색 절단면 배경 */
+        .bg-right {
+            right: 15%;
+            top: 5%;
+            width: 35%;
+            height: 80%;
+            opacity: 0.8;
         }
 
-        /* 5. 왼쪽 세로 보조 텍스트 라인 */
-        .info-text-left {
+        /* ------------------------------------
+           추가적인 기하학적 요소 (선택 사항)
+        ------------------------------------ */
+        /* 더 역동적인 느낌을 위해 추가적인 절단면을 넣을 수 있습니다. */
+        .bg-mid {
             position: absolute;
-            top: 45%;
-            left: 4%;
-            transform: rotate(-90deg) translateX(-50%);
-            transform-origin: left top;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: 3px;
-            border-left: 3px solid #ffffff;
-            padding-left: 12px;
-            z-index: 5;
-        }
-
-        /* 6. 오른쪽 세로 배치 표정 상자 3개 */
-        .face-box-container {
-            position: absolute;
-            bottom: 15%;
-            right: 5%;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 4;
-        }
-        .face-box {
-            width: 130px;
-            height: 130px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 0 20px rgba(0,0,0,0.6);
-        }
-
-        /* 7. 최하단 하단 카피라이트 */
-        .copyright {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
-            letter-spacing: 1px;
-            z-index: 5;
+            background: rgba(201, 10, 10, 0.4);
+            transform: skewX(-15deg);
+            width: 15%;
+            height: 60%;
+            top: 20%;
+            left: 50%;
         }
     </style>
 </head>
 <body>
 
     <div id="wallpaper-container">
-        <div class="bg-shape"></div>
-
-        <div class="info-text-left">세븐스 드워프 제로</div>
-
-        <div class="logo-main">
-            NIKKE
-            <div class="logo-sub">GODDESS OF VICTORY</div>
-        </div>
-
-        <div class="ui-box">
-            <div class="elysion">ELYSION</div>
-            <div class="counters">카운터스</div>
-            <div class="char-name">라피:레드 후드</div>
-        </div>
-
-        <div class="face-box-container">
-            <div class="face-box"></div>
-            <div class="face-box"></div>
-            <div class="face-box"></div>
-        </div>
-        
-        <div class="copyright">©PROXIMA BETA PTE. LTD. ©SHIFT UP CORP.</div>
-    </div>
+        <div class="bg-shape bg-left"></div>
+        <div class="bg-shape bg-right"></div>
+        <div class="bg-mid"></div> </div>
 
     <script>
         const container = document.getElementById('wallpaper-container');
-        const bgShape = document.querySelector('.bg-shape');
+        const bgShapes = document.querySelectorAll('.bg-shape');
 
         container.addEventListener('mousemove', (e) => {
-            // 마우스 커서의 위치에 따라 빨간색 배경판이 화면에서 미세하고 부드럽게 움직입니다.
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
+            // 마우스 위치에 따라 배경 판이 미세하게 움직이는 효과
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
             
-            bgShape.style.transform = `skewX(-16deg) translate(${xAxis}px, ${yAxis}px)`;
+            bgShapes.forEach(shape => {
+                shape.style.transform = `skewX(-15deg) translate(${xAxis}px, ${yAxis}px)`;
+            });
         });
     </script>
 </body>
