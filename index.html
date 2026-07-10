@@ -1,61 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>Wallpaper</title>
-
-<style>
-html, body{
-    margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#ffffff;
-}
-
-body{
-    position:relative;
-}
-
-/* 공통 */
-.line{
-    position:absolute;
-    width:650px;
-    height:28px;
-    background:#ff0000;
-
-    border-radius:20px;
-
-    /* 세로에서 시계방향 10도 */
-    transform:rotate(100deg);
-
-    transform-origin:left center;
-}
-
-/* 위치 */
-.line1{
-    left:1820px;
-    top:330px;
-}
-
-.line2{
-    left:1760px;
-    top:430px;
-}
-
-.line3{
-    left:1700px;
-    top:530px;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikke Red Hood Background</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <div id="wallpaper-container">
+        <div class="bg-shape bg-left"></div>
+        <div class="bg-shape bg-right"></div>
 
-<div class="line line1"></div>
-<div class="line line2"></div>
-<div class="line line3"></div>
+        <div class="logo">NIKKE GODDESS OF VICTORY</div>
+        <div class="elysion-logo">ELYSION</div>
+        <div class="main-text">라피: 레드 후드</div>
+        <div class="secondary-text">카운터스</div>
+        <div class="small-text-left">세븐스 드워프 제로</div>
 
+        <div class="face-box-container">
+            <div class="face-box top"></div>
+            <div class="face-box middle"></div>
+            <div class="face-box bottom"></div>
+        </div>
+        
+        <div class="copyright">&copy;PROXIMA BETA PTE. LTD. &copy;SHIFT UP CORP.</div>
+    </div>
 </body>
 </html>
