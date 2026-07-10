@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nikke Minimalist Background</title>
+    <title>Nikke Refined Minimalist Background</title>
     <style>
         /* 기본 스타일 초기화 및 화면 꽉 채우기 */
         * {
@@ -14,76 +14,78 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #ffffff; /* 기본 하얀색 배경 */
+            background-color: #ffffff; /* 하얀색 바탕 */
             overflow: hidden;
         }
 
-        /* 전체 컨테이너 고정 크기 (Lively Wallpaper용 비례 설정) */
+        /* 전체 컨테이너 고정 크기 */
         #wallpaper-container {
             position: relative;
             width: 100vw;
             height: 100vh;
         }
 
-        /* ------------------------------------
-           배경 도형 레이어 (핵심 수정 부분)
-        ------------------------------------ */
-        .bg-shape {
+        /* 공통 스타일: 평행사변형/마름모 형태 기본 정의 */
+        .shape {
             position: absolute;
-            background: #cc1111; /* 빨간색 */
             transform: skewX(-15deg);
+            transform-origin: right center; /* 우측 고정 기준점 */
             transition: transform 0.1s ease-out;
         }
 
-        /* 왼쪽 큰 빨간색 절단면 배경 */
-        .bg-left {
-            left: -5%;
+        /* 1. 가장 앞쪽의 메인 빨간색 평행사변형 
+           (오른쪽은 유지하되, 왼쪽 면이 화면 내에 완전히 들어오도록 시작 위치와 너비 조정) */
+        .shape-front {
+            background: #cc1111;
             top: -10%;
-            width: 55%;
+            left: 5vw;       /* 왼쪽 여백을 주어 화면 안으로 밀어 넣음 */
+            width: 45vw;     /* 왼쪽을 줄여 화면 내에 다 나오도록 너비 최적화 */
             height: 120%;
+            z-index: 3;
         }
 
-        /* 오른쪽 위 작은 빨간색 절단면 배경 */
-        .bg-right {
-            right: 15%;
+        /* 2. 중간 레이어 (기존 깊이감 유지용 투명도 면) */
+        .shape-mid {
+            background: rgba(201, 10, 10, 0.35);
+            top: 15%;
+            left: 48vw;
+            width: 18vw;
+            height: 70%;
+            z-index: 2;
+        }
+
+        /* 3. 가장 뒤쪽에 있는 마름모 면 
+           (x축 가로 길이를 대폭 늘려 와이드하게 확장) */
+        .shape-back {
+            background: rgba(160, 10, 10, 0.85);
             top: 5%;
-            width: 35%;
-            height: 80%;
-            opacity: 0.8;
-        }
-
-        /* ------------------------------------
-           추가적인 기하학적 요소 (선택 사항)
-        ------------------------------------ */
-        /* 더 역동적인 느낌을 위해 추가적인 절단면을 넣을 수 있습니다. */
-        .bg-mid {
-            position: absolute;
-            background: rgba(201, 10, 10, 0.4);
-            transform: skewX(-15deg);
-            width: 15%;
-            height: 60%;
-            top: 20%;
-            left: 50%;
+            right: 10vw;
+            width: 48vw;     /* x축 가로 길이를 대폭 확장 */
+            height: 85%;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
 
     <div id="wallpaper-container">
-        <div class="bg-shape bg-left"></div>
-        <div class="bg-shape bg-right"></div>
-        <div class="bg-mid"></div> </div>
+        <div class="shape shape-front"></div>
+        
+        <div class="shape shape-mid"></div>
+        
+        <div class="shape shape-back"></div>
+    </div>
 
     <script>
         const container = document.getElementById('wallpaper-container');
-        const bgShapes = document.querySelectorAll('.bg-shape');
+        const shapes = document.querySelectorAll('.shape');
 
         container.addEventListener('mousemove', (e) => {
-            // 마우스 위치에 따라 배경 판이 미세하게 움직이는 효과
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+            // 마우스 움직임 시에도 우측 고정(transform-origin)을 유지하며 부드럽게 반응
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
             
-            bgShapes.forEach(shape => {
+            shapes.forEach(shape => {
                 shape.style.transform = `skewX(-15deg) translate(${xAxis}px, ${yAxis}px)`;
             });
         });
