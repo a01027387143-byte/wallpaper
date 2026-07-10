@@ -4,26 +4,206 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nikke Red Hood Background</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 기본 스타일 초기화 및 화면 꽉 채우기 */
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a1a; /* 어두운 회색/검은색 배경 */
+            font-family: 'Malgun Gothic', sans-serif;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        /* 전체 컨테이너 고정 크기 (Lively Wallpaper용 비례 설정) */
+        #wallpaper-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, #2a2a2a 0%, #111111 100%);
+        }
+
+        /* 모눈종이 패턴 배경 (원작 느낌 추가) */
+        #wallpaper-container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+
+        /* ------------------------------------
+           배경 도형 레이어 (핵심 수정 부분)
+        ------------------------------------ */
+        .bg-shape {
+            position: absolute;
+            background: linear-gradient(135deg, #cc1111 0%, #990000 100%);
+            transform: skewX(-15deg);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.1s ease-out;
+        }
+
+        /* 왼쪽 큰 빨간색 절단면 배경 */
+        .bg-left {
+            left: -5%;
+            top: -10%;
+            width: 55%;
+            height: 120%;
+            opacity: 0.9;
+        }
+
+        /* ------------------------------------
+           텍스트 및 로고 디자인 레이어
+        ------------------------------------ */
+        .logo-main {
+            position: absolute;
+            top: 40px;
+            right: 5%;
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-align: right;
+            line-height: 0.9;
+            font-family: 'Arial Black', sans-serif;
+        }
+        .logo-sub {
+            font-size: 12px;
+            font-weight: normal;
+            letter-spacing: 6px;
+            color: #ccc;
+            margin-top: 5px;
+        }
+
+        /* UI 및 캐릭터 이름 요소 박스 */
+        .ui-box {
+            position: absolute;
+            bottom: 15%;
+            left: 5%;
+            z-index: 10;
+        }
+
+        .elysion {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 5px;
+        }
+
+        .counters {
+            background-color: #e60000;
+            color: white;
+            display: inline-block;
+            padding: 3px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            transform: skewX(-10deg);
+        }
+
+        .char-name {
+            background-color: #222;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            padding: 10px 30px;
+            border-left: 5px solid #e60000;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* 왼쪽 세븐스 드워프 텍스트 */
+        .info-text-left {
+            position: absolute;
+            top: 40%;
+            left: 3%;
+            transform: rotate(-90deg) translateX(-50%);
+            transform-origin: left top;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 2px;
+            border-left: 2px solid #fff;
+            padding-left: 10px;
+        }
+
+        /* ------------------------------------
+           오른쪽 표현 상자 (서브 페이스 박스)
+        ------------------------------------ */
+        .face-box-container {
+            position: absolute;
+            bottom: 20%;
+            right: 5%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .face-box {
+            width: 120px;
+            height: 120px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            /* 나중에 이 상자 안에 캐릭터 얼굴 크롭 이미지를 넣으려면 아래 주석을 해제하세요 */
+            /* background-size: cover; */
+        }
+
+        /* 하단 카피라이트 */
+        .copyright {
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+            text-align: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 1px;
+        }
+    </style>
 </head>
 <body>
+
     <div id="wallpaper-container">
         <div class="bg-shape bg-left"></div>
-        <div class="bg-shape bg-right"></div>
 
-        <div class="logo">NIKKE GODDESS OF VICTORY</div>
-        <div class="elysion-logo">ELYSION</div>
-        <div class="main-text">라피: 레드 후드</div>
-        <div class="secondary-text">카운터스</div>
-        <div class="small-text-left">세븐스 드워프 제로</div>
+        <div class="info-text-left">세븐스 드워프 제로</div>
+
+        <div class="logo-main">
+            NIKKE
+            <div class="logo-sub">GODDESS OF VICTORY</div>
+        </div>
+
+        <div class="ui-box">
+            <div class="elysion">ELYSION</div>
+            <div class="counters">카운터스</div>
+            <div class="char-name">라피 : 레드 후드</div>
+        </div>
 
         <div class="face-box-container">
-            <div class="face-box top"></div>
-            <div class="face-box middle"></div>
-            <div class="face-box bottom"></div>
+            <div class="face-box"></div>
+            <div class="face-box"></div>
+            <div class="face-box"></div>
         </div>
         
-        <div class="copyright">&copy;PROXIMA BETA PTE. LTD. &copy;SHIFT UP CORP.</div>
+        <div class="copyright">©PROXIMA BETA PTE. LTD. ©SHIFT UP CORP.</div>
     </div>
+
+    <script>
+        const container = document.getElementById('wallpaper-container');
+        const bgLeft = document.querySelector('.bg-left');
+
+        container.addEventListener('mousemove', (e) => {
+            // 마우스 위치에 따라 배경 판이 미세하게 움직이는 효과
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+            
+            bgLeft.style.transform = `skewX(-15deg) translate(${xAxis}px, ${yAxis}px)`;
+        });
+    </script>
 </body>
 </html>
